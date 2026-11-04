@@ -87,8 +87,8 @@ async def create_job(request: CreateJobRequest, session: Session= Depends(get_se
 @router.get("/jobs/{job_id}", response_model=JobResponse)
 async def get_job(job_id: str, session: Session=Depends(get_session)):
     job= session.get(Job, job_id)
-    if not job: 
-        raise HTTPException(status=400, detail="Job not found")
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
 
     thumbnails= session.exec(select(Thumbnail).where(Thumbnail.job_id==job_id)).all()
 
