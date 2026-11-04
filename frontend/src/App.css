@@ -1,0 +1,438 @@
+.app-shell {
+  min-height: 100vh;
+  background: radial-gradient(circle at 82% 12%, #29251d 0, transparent 28%), #11110f;
+  color: #f4f1ec;
+}
+
+/* Layout */
+
+.topbar,
+main,
+footer {
+  max-width: 1240px;
+  margin: auto;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.topbar {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #2a2925;
+}
+
+/* Header */
+
+.brand {
+  color: #f4f1ec;
+  text-decoration: none;
+  font-family: 'Space Grotesk';
+  font-weight: 700;
+  font-size: 19px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.brand-mark {
+  color: #f4bf58;
+  font-size: 24px;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #dddcda;
+  font: 12px 'DM Mono';
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: #95c68b;
+  border-radius: 50%;
+}
+
+.avatar {
+  border: 1px solid #4b473e;
+  color: #f3c265;
+  background: #252219;
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  margin-left: 15px;
+}
+
+/* Intro Section */
+
+.intro {
+  padding: 78px 0 64px;
+}
+
+.eyebrow,
+.section-label {
+  color: #d4a454;
+  font: 11px 'DM Mono';
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.intro h1 {
+  font: 700 clamp(42px, 6vw, 78px)/.98 'Space Grotesk';
+  letter-spacing: -.065em;
+  margin: 19px 0 22px;
+}
+
+.intro h1 span {
+  color: #d9a74d;
+}
+
+.subhead {
+  color: #9d9a92;
+  font-size: 17px;
+  max-width: 430px;
+  line-height: 1.55;
+}
+
+/* Main Workspace */
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(290px, 390px) 1fr;
+  gap: 70px;
+  padding-bottom: 90px;
+}
+
+.composer,
+.results {
+  border-top: 1px solid #3a3731;
+  padding-top: 25px;
+}
+
+/* Section Labels */
+
+.section-label {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 17px;
+}
+
+.section-label span {
+  color: #7e786c;
+}
+
+.section-label em {
+  color: #6f6b64;
+  font: 11px 'DM Sans';
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: auto;
+}
+
+/* Prompt Form */
+
+.composer textarea {
+  width: 100%;
+  background: #1a1916;
+  border: 1px solid #3b3933;
+  border-radius: 4px;
+  color: #f4f1ec;
+  padding: 16px;
+  resize: vertical;
+  line-height: 1.5;
+  outline: none;
+}
+
+.composer textarea:focus {
+  border-color: #c59548;
+}
+
+/* Example Prompts */
+
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 12px 0 31px;
+}
+
+.examples button {
+  border: 1px solid #37352f;
+  background: #1b1a17;
+  color: #89857c;
+  border-radius: 99px;
+  padding: 7px 10px;
+  font-size: 11px;
+  text-align: left;
+}
+
+/* Image Upload */
+
+.dropzone {
+  width: 100%;
+  min-height: 72px;
+  border: 1px dashed #575046;
+  background: #191815;
+  color: #c0bbb1;
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  padding: 12px;
+  text-align: left;
+  border-radius: 4px;
+  margin-bottom: 31px;
+}
+
+.dropzone strong {
+  width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #d9a74d;
+  background: #302a1e;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.dropzone small {
+  display: block;
+  color: #77736a;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.dropzone img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+/* Number of Concepts */
+
+.count-picker {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 27px;
+}
+
+.count-picker button {
+  width: 42px;
+  height: 34px;
+  border: 1px solid #3a3730;
+  background: #191815;
+  color: #8d887f;
+  border-radius: 3px;
+}
+
+.count-picker button.selected {
+  color: #1b1915;
+  border-color: #d2a04e;
+  background: #d2a04e;
+}
+
+/* Generate Button */
+
+.generate {
+  width: 100%;
+  border: 0;
+  background: #d1a04f;
+  color: #1b1915;
+  font-weight: 700;
+  padding: 14px;
+  border-radius: 3px;
+}
+
+.generate:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+/* Results Section */
+
+.results-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.results h2 {
+  margin: 0 0 20px;
+  font: 600 24px 'Space Grotesk';
+}
+
+.result-count {
+  color: #8eb589;
+  font: 11px 'DM Mono';
+  margin-bottom: 24px;
+}
+
+/* Concept Grid */
+
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+/* Empty State */
+
+.empty-state {
+  grid-column: 1 / -1;
+  min-height: 300px;
+  border: 1px dashed #383630;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #77736c;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 31px;
+  color: #8d713d;
+  margin-bottom: 14px;
+}
+
+.empty-state p {
+  margin: 0 0 7px;
+  color: #aaa59b;
+}
+
+.empty-state span {
+  font-size: 12px;
+}
+
+/* Concept Cards */
+
+.concept-card {
+  background: #1a1916;
+  border: 1px solid #36332d;
+}
+
+.image-wrap {
+  aspect-ratio: 16 / 10;
+  background: #24221d;
+  overflow: hidden;
+}
+
+.image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.loading-card {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: #c49545;
+}
+
+.loading-card span {
+  font-size: 34px;
+}
+
+.loading-card small {
+  color: #89847a;
+  font-size: 11px;
+  margin-top: -44px;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  color: #aaa59b;
+  font: 11px 'DM Mono';
+}
+
+.card-meta button {
+  background: none;
+  border: 0;
+  color: #c89a50;
+  font-size: 19px;
+}
+
+/* Error Message */
+
+.error-banner {
+  max-width: 1240px;
+  margin: -45px auto 50px;
+  padding: 12px 32px;
+  color: #e49b8e;
+  font-size: 13px;
+}
+
+/* Footer */
+
+footer {
+  border-top: 1px solid #2a2925;
+  padding-top: 22px;
+  padding-bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  color: #66635d;
+  font: 11px 'DM Mono';
+}
+
+.footer-mark {
+  color: #b88c48;
+}
+
+/* Responsive Design */
+
+@media (max-width: 820px) {
+  .topbar,
+  main,
+  footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .topbar-right {
+    font-size: 0;
+  }
+
+  .workspace {
+    grid-template-columns: 1fr;
+    gap: 52px;
+  }
+
+  .intro {
+    padding: 55px 0 45px;
+  }
+
+  .concept-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .concept-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .intro h1 {
+    font-size: 44px;
+  }
+
+  .topbar {
+    height: 64px;
+  }
+
+  footer {
+    gap: 20px;
+    flex-direction: column;
+  }
+}
