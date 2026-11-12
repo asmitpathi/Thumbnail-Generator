@@ -1,12 +1,19 @@
+from functools import lru_cache
+
 from imagekitio import ImageKit
 from config import IMAGEKIT_PRIVATE_KEY, IMAGEKIT_PUBLIC_KEY, IMAGEKIT_URL_ENDPOINT
 
-imagekit= ImageKit(private_key=IMAGEKIT_PRIVATE_KEY)
+
+@lru_cache(maxsize=1)
+def _get_imagekit():
+    if not IMAGEKIT_PRIVATE_KEY:
+        raise RuntimeError("IMAGEKIT_PRIVATE_KEY is not configured")
+    return ImageKit(private_key=IMAGEKIT_PRIVATE_KEY)
 
 def upload_file(file_bytes: bytes, file_name: str, folder: str, content_type: str="image/png"):
     """Upload a file to ImageKit and return the CDN URL"""
     print(type(file_bytes), type(file_name), type(content_type))
-    result= imagekit.files.upload(
+    result= _get_imagekit().files.upload(
         file=(file_name, file_bytes, content_type),
         file_name=file_name,
         folder=folder,
