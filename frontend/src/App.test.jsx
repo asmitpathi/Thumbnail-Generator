@@ -24,7 +24,10 @@ describe('thumbnail prompt form', () => {
   })
 
   it('previews a selected reference image', () => {
-    vi.stubGlobal('URL', { createObjectURL: vi.fn(() => 'blob:reference-image') })
+    vi.stubGlobal('URL', {
+      createObjectURL: vi.fn(() => 'blob:reference-image'),
+      revokeObjectURL: vi.fn()
+    })
     render(<App />)
 
     const file = new File(['image data'], 'creator.png', { type: 'image/png' })

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { createJob, subscribeToJob, uploadHeadshot } from './api'
 import './App.css'
 
@@ -8,7 +8,7 @@ const examples = [
   'Gaming reaction thumbnail with neon purple energy and expressive face'
 ]
 
-function Header() {
+const Header = memo(function Header() {
   return (
     <header className="topbar">
       <a className="brand" href="/">
@@ -23,15 +23,21 @@ function Header() {
       </div>
     </header>
   )
-}
+})
 
-function PromptForm({ onSubmit, busy }) {
+const PromptForm = memo(function PromptForm({ onSubmit, busy }) {
   const [prompt, setPrompt] = useState('')
   const [count, setCount] = useState(3)
   const [file, setFile] = useState(null)
   const [preview, setPreview] = useState('')
 
   const inputRef = useRef(null)
+
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview)
+    }
+  }, [preview])
 
   const chooseFile = (event) => {
     const selectedFile = event.target.files?.[0]
@@ -136,7 +142,7 @@ function PromptForm({ onSubmit, busy }) {
       </button>
     </form>
   )
-}
+})
 
 function Results({ items, status }) {
   const getHeading = () => {
@@ -182,6 +188,8 @@ function Results({ items, status }) {
                   <img
                     src={item.imagekit_url}
                     alt={item.style_name}
+                    loading="lazy"
+                    decoding="async"
                   />
                 ) : (
                   <div className="loading-card">
@@ -219,7 +227,7 @@ function App() {
   const [status, setStatus] = useState('idle')
   const [error, setError] = useState('')
 
-  const generate = async ({ prompt, count, file }) => {
+  const generate = useCallback(async ({ prompt, count, file }) => {
     try {
       setError('')
       setStatus('working')
@@ -260,7 +268,7 @@ function App() {
       setStatus('error')
       setError(err.message || 'Something went wrong.')
     }
-  }
+  }, [])
 
   return (
     <div className="app-shell">
