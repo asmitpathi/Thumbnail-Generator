@@ -1,14 +1,33 @@
 services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: thumbnail_db
+      POSTGRES_USER: thumbnail_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in the project root .env file}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   backend:
     build:
-      context: ./backend
+      context: .
+      dockerfile: backend/Dockerfile
     env_file:
-      - ./backend/.env
+      - ./.env
     environment:
-      DATABASE_URL: sqlite:////data/thumbnailgenerator.db
+      DATABASE_URL: postgresql+psycopg://thumbnail_user:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in the project root .env file}@db:5432/thumbnail_db
       FRONTEND_URL: http://localhost:5173
-    volumes:
-      - thumbnail_data:/data
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - "8080:8080"
     healthcheck:
@@ -20,7 +39,8 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: .
+      dockerfile: frontend/Dockerfile
       args:
         VITE_API_URL: /api
     depends_on:
@@ -30,4 +50,4 @@ services:
       - "5173:80"
 
 volumes:
-  thumbnail_data:
+  postgres_data:
