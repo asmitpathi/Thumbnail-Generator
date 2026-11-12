@@ -14,7 +14,6 @@
 **/*.py[cod]
 **/*.db
 backend/tests/
-backend/requirements-dev.txt
 
 **/*.log
 **/.DS_Store
